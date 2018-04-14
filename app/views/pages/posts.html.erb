@@ -1,0 +1,47 @@
+<style>
+    .btn-primary{
+  background-color:<%= current_user.hex %>;
+}
+.btn-primary:hover{
+  background-color:<%= current_user.hex %>;
+}
+.btn-secondary{
+  border:1px solid <%= current_user.hex %>;
+  color:<%= current_user.hex %>;
+}
+.btn-secondary:hover{
+    color:<%= current_user.hex %>;
+}
+
+ body {
+        background: 
+        linear-gradient(
+        <%= current_user.hex %>4d,
+        <%= current_user.hex %>4d
+        ), url("/<%= current_user.bg %>.jpg") no-repeat center center fixed;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
+<%= render '/layouts/nav_user' %>
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-2"></div>
+    
+    <div class="col-sm-8">
+         <% for @p in @posts %>
+        <%= render '/components/post' %>
+    <% end %>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+</div>
+
+<script>
+    document.title="All <%= number_with_delimiter(@posts.count, :delimiter => ',') %> Posts | ICC Hub"
+</script>

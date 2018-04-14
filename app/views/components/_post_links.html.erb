@@ -1,0 +1,38 @@
+<style>
+    #list{
+        transition: all 0.3s ease;
+    }
+</style>
+
+
+
+<div class="post-links" style="margin-bottom:30px">
+                      <% if @p.post_type == "Prayer"  %>
+                      <%= link_to "&nbsp;&nbsp;&nbsp;🙏 &nbsp;<span class='action-count'>#{@p.get_upvotes.size}</span>".html_safe, like_post_path(@p), :id => "b", :confirm => "Are you sure?", :method => :put, :class =>"pray-button", :style => "color:#000; margin-top:10px;" %>
+                      
+                      <span><a class="pray-button" href="/post/<%= @p.id %>"><span style="padding:7px;padding-left:10px;padding-right:10px;"><span class="glyphicon glyphicon-comment"></span></span><span class="action-count"><%= Comment.where(post_id: @p.id).count %></span></a></span>
+                      <% elsif @p.post_type == "Praise"  %>
+                      <%= link_to "&nbsp;&nbsp;&nbsp;🙌 &nbsp;<span class='action-count-praise'>#{@p.get_upvotes.size}</span>".html_safe, like_post_path(@p), :id => "a", :confirm => "Are you sure?", :method => :put, :class =>"praise-button", :style => "color:#000; margin-top:10px;" %>
+                      <span><a class="praise-button" href="/post/<%= @p.id %>"><span style="padding:7px;padding-left:10px;padding-right:10px;"><span class="glyphicon glyphicon-comment"></span></span><span class="action-count-praise"><%= Comment.where(post_id: @p.id).count %></span></a></span>
+                      <% elsif @p.post_type == "Transport"  %>
+                      <%= link_to "&nbsp;&nbsp;&nbsp;👁 &nbsp;<span class='action-count-transport'>#{@p.get_upvotes.size}</span>".html_safe, like_post_path(@p), :id => "a", :confirm => "Are you sure?", :method => :put, :class =>"transport-button", :style => "color:#000; margin-top:10px;" %>
+                      <span><a class="transport-button" href="/post/<%= @p.id %>"><span style="padding:7px;padding-left:10px;padding-right:10px;"><span class="glyphicon glyphicon-comment"></span></span><span class="action-count-transport"><%= Comment.where(post_id: @p.id).count %></span></a></span>
+                      <% elsif @p.post_type == "Announcement"  %>
+                      <%= link_to "&nbsp;&nbsp;&nbsp;👍 &nbsp;<span class='action-count-announcement'>#{@p.get_upvotes.size}</span>".html_safe, like_post_path(@p), :id => "a", :confirm => "Are you sure?", :method => :put, :class =>"announcement-button", :style => "color:#000; margin-top:10px;" %>
+                      <span><a class="announcement-button" href="/post/<%= @p.id %>"><span style="padding:7px;padding-left:10px;padding-right:10px;"><span class="glyphicon glyphicon-comment"></span></span><span class="action-count-announcement"><%= Comment.where(post_id: @p.id).count %></span></a></span>
+                      <% else %>
+                      <span><a class="update-button" href="/post/<%= @p.id %>"><span style="padding:7px;padding-left:10px;padding-right:10px;"><span class="glyphicon glyphicon-comment"></span></span><span class="action-count-update"><%= Comment.where(post_id: @p.id).count %></span></a></span>
+                    
+                     
+                      
+                      <% end %>
+                </div>
+                
+    <div id="list" style="margin-top:30;margin-bottom:0px;opacity:0;height:0px">
+    <% for @u in @p.get_upvotes do %>
+        <% @user = User.find(@u.voter_id) %>
+        <img alt="Brand" src="<%= @user.avatar.url(:thumb) %>" style="height:100%;width:auto;border-radius:50%;">
+    <% end %>
+</div>
+                
+                

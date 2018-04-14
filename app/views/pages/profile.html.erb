@@ -1,0 +1,206 @@
+<style>
+
+.btn-primary{
+  background-color:<%= User.find_by_username(@username).hex %>;
+}
+.btn-primary:hover{
+  background-color:<%= User.find_by_username(@username).hex %>;
+}
+.btn-secondary{
+  border:1px solid <%= User.find_by_username(@username).hex %>;
+  color:<%= User.find_by_username(@username).hex %>;
+}
+.btn-secondary:hover{
+    color:<%= User.find_by_username(@username).hex %>;
+}
+
+    textarea:focus, textarea:active{
+        outline:none;
+        border-bottom:4px solid <%= User.find_by_username(@username).hex %> !important;
+    }
+    
+    @keyframes bouncing-loader {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.1;
+    transform: translateY(-1rem);
+  }
+}
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  position:fixed;
+  background:rgba(0,0,0,0.8);
+  z-index:1100;
+  visibility:hidden;
+  align-items: center;
+}
+.bouncing-loader > div {
+  width: 2rem;
+  height: 2rem;
+  margin: 3rem 0.2rem;
+  background: #fff;
+  border-radius: 50%;
+  z-index:1101;
+  margin-top:5%;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bouncing-loader > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+div.halfraised.col-md-8{
+  margin-top: 150px;margin-bottom: 150px;
+}
+
+@media (max-width:768px){
+  .div_base{
+        padding-left:0;
+        padding-right:0;
+    }
+    div.halfraised.col-md-8{
+      margin-top:-40px;
+      margin-bottom:20px;
+    }
+}
+
+.col-sm-7 > a{
+    color:<%= User.find_by_username(@username).hex %> !important;
+}
+
+.col-sm-7 > a > .tag{
+    background-color: <%= User.find_by_username(@username).hex %> !important;
+}
+</style>
+
+<div class="bouncing-loader" id="bouncing">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+
+<%= render '/layouts/nav_user' %>
+
+<div class="top-img jumbotron" style="text-align:center; background: linear-gradient(<%= User.find_by_username(@username).hex %>4d,<%= User.find_by_username(@username).hex %>4d), url('/<%= User.find_by_username(@username).bg %>.jpg') no-repeat center center fixed; width:100%; margin-top:-170px;">
+        <div style="margin-top:200px;margin-bottom:200px;">
+        <img class="raised rounded"src="<%= User.find_by_username(@username).avatar.url(:medium) %>" style="max-width:180px;z-index:6;float:top;margin-top:-30px;background-color:white"><br><br>
+        <t1 style="color:white" class="raisedText"><%= User.find_by_username(@username).display_name %></t1><br>
+         <t4 style="color:rgba(255,255,255,0.8)" class="raisedText">@<%= @username %></t4>
+        </div>
+        <div style="margin-top:-150px;">
+            <a href="/@<%= @username %>/followers">
+             <div style="display:inline-block;margin-left:25px;margin-right:25px;">
+                <t1 style="color: white" class="raisedText"><%= number_with_delimiter(User.find_by_username(@username).followers.count, :delimiter => ',') %></t1><br>
+                <t4 style="color:white" class="raisedText">Followers</t4>
+            </div>
+            </a>
+            <div style="display:inline-block;margin-left:25px;margin-right:25px;">
+                <t1 style="color: white" class="raisedText"><%= number_with_delimiter(User.find_by_username(@username).posts.count, :delimiter => ',') %></t1><br>
+                <t4 style="color:white" class="raisedText">Posts</t4>
+            </div>
+            <a href="/@<%= @username %>/following">
+                <div style="display:inline-block;margin-left:25px;margin-right:25px;margin-bottom:80px;">
+                <t1 style="color: white" class="raisedText"><%= number_with_delimiter(User.find_by_username(@username).following.count, :delimiter => ',') %></t1><br>
+                <t4 style="color:white" class="raisedText">Following</t4>
+            </div>
+            </a>
+        </div>
+         
+         
+         </div>
+
+<div class="container">
+   <center>
+       
+        <% if current_user.id != User.find_by_username(@username).id %>
+               <%= render '/components/follow_button', :user => User.find_by_username(params[:id]) %>
+            <% end %>
+             <center>
+         <% if @username == current_user.username %>
+              <a href="/users/edit" class="btn btn-primary profile-btn" >EDIT PROFILE</a>
+          <% end %></center>
+          <% if @username != current_user.username %>
+          <button class="btn btn-secondary profile-btn" style="margin-top:0px;margin-bottom:20px" data-toggle="modal" data-target="#myModal">MESSAGE</button>
+          <% end %>
+   </center>
+<div class="row" style="margin:20px;margin-bottom:40px">
+    <div class="col-xs-12">
+        <center>
+            <t1>About Me</t1><br><br>
+            <t3 style="color:#777;letter-spacing:.6px;width:500px;line-height:32px;"><% if !User.find_by_username(@username).description || User.find_by_username(@username).description.length <= 0 then %>This user has not written anything about themselves... Apparently they like to keep an air of mystery about them. 🤔<% else %><%= User.find_by_username(@username).description %><% end %></t3>
+        </center>
+        </div>
+</div>
+
+              
+<div class="row" style="margin-top:30px;">
+    
+    
+    <div class="col-xs-12">
+        <% if @posts.count > 0 then %>
+         <% for @p in @posts %>
+        <%= render "/components/post" %>
+    <% end %>
+    <% else %>
+            <div class="post-container" style="margin:50px 0">
+              <div class="row" style="padding:10px;padding-top:0;margin:50px;top:0">
+              <div class="col-sm-12">
+                 <center><h1><span style="color:#16c9ca">@<%= @username %></span> has not written any posts!</h1></center>
+              </div>
+             
+            
+          </div>
+        </div>
+    <% end %>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-top:100px">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Send an email to <%= User.find_by_username(@username).display_name %>:</h4>
+        <input id = "subj" placeholder="Subject" type="text" style="width:98%;padding: 15px 0 0 5px;border: none;font-size: 2rem;letter-spacing: 1px; color: <%= User.find_by_username(@username).hex %>;" />
+        
+<!-- <%= link_to "Send", :controller => "pages", :action => "send_custom", :user => "#{User.find_by_username(@username).id}", :subject => "YOLO", :message => "MESSAGE" %> -->
+</div>
+      <div class="modal-body">
+          <textarea id = "mess" style="
+    width:  100%;
+    border: none;
+    resize:  vertical;
+    height: 100px;
+    background-color: #f5f5f5;
+    border-radius:  4px;
+    letter-spacing:  0.5px;
+    padding: 10px;
+    font-size: 1.7rem;
+"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-primary" onClick="runFunc()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    document.title = "@<%= @username %> | ICC Hub"
+    
+    function runFunc(){
+        document.getElementById('bouncing').style.visibility = 'visible';
+        window.location = "/send_custom?message=" + document.getElementById("mess").value.replace(/(?:\r\n|\r|\n)/g, '%0A') + "&subject=" + document.getElementById("subj").value + "&user=<%= User.find_by_username(@username).id %>"
+    }
+</script>

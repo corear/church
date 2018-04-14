@@ -1,0 +1,270 @@
+<style>
+.btn-primary{
+  background-color:<%= current_user.hex %>;
+}
+.btn-primary:hover{
+  background-color:<%= current_user.hex %>;
+}
+.btn-secondary{
+  border:1px solid <%= current_user.hex %>;
+  color:<%= current_user.hex %>;
+}
+.btn-secondary:hover{
+    color:<%= current_user.hex %>;
+}
+
+ body {
+        background: 
+        linear-gradient(
+        <%= current_user.hex %>4d,
+        <%= current_user.hex %>4d
+        ), url("/<%= current_user.bg %>.jpg") no-repeat center center fixed;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+      .div_base{
+    transition:all 0.5s ease;
+    position:relative;
+    padding-left:100px;
+    padding-right:100px;
+    margin-top:50px;
+  }
+  
+    .row{
+    margin:0;
+    padding:0;
+  }
+  
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+  .col-md-4{
+    margin:0;
+    padding:10px;
+    background-color:rgba(200, 200, 200, 0.2);
+    color:#000;
+    transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);
+  }
+  
+  .text_overlay{
+    transition: all 0.3s ease;
+    color:#a0a0a0;
+    border:none;
+    border-bottom:2px solid #bfbfbf;
+  }
+  
+.inputField2{
+    margin-top:10px;
+    border-radius:5px;
+    border:none;
+    color:#333;
+    background:#dae8e8;
+    padding:13px;
+    font-size:1.2em;
+    font-weight:500;
+    width:100%;
+    transition: all 0.3s ease;
+    text-align:center;
+}
+
+input:focus + h4  {
+  position: relative;
+  top:-70px;
+  font-size:1em;
+}
+
+.inputField2:focus{
+  text-align:left;
+  background:none;
+  border-radius:0;
+  border-bottom:2px solid #dae8e8;
+  outline:none;
+}
+
+.glyphicon-lock{
+  top:2px;
+}
+
+.glyphicon-envelope{
+  top:2px;
+}
+
+@keyframes bouncing-loader {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.1;
+    transform: translateY(-1rem);
+  }
+}
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  position:fixed;
+  background:rgba(0,0,0,0.8);
+  z-index:1000;
+  visibility:hidden;
+  align-items: center;
+}
+.bouncing-loader > div {
+  width: 2rem;
+  height: 2rem;
+  margin: 3rem 0.2rem;
+  background: #fff;
+  border-radius: 50%;
+  z-index:1001;
+  margin-top:5%;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bouncing-loader > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+div.halfraised.col-md-8{
+  margin-top: 150px;margin-bottom: 150px;
+}
+
+@media (max-width:768px){
+  .div_base{
+        padding-left:0;
+        padding-right:0;
+    }
+    div.halfraised.col-md-8{
+      margin-top:-40px;
+      margin-bottom:20px;
+    }
+}
+
+</style>
+
+<div class="bouncing-loader" id="bouncing">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+
+<%= render '/layouts/nav_user' %>
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 halfraised" style="border-radius: 5px;background-color: #fff;padding: 20px;overflow:hidden;">
+    
+    <center>
+      <h2 style="font-weight:600;margin-bottom:20px;margin-top:20px;">Edit Profile</h2>
+    <h4>Change your settings below.</h4>
+    
+  <img src="<%= current_user.avatar.url(:medium) %>" style="max-width:100px;margin-top:10px;background-color:white" class="raised rounded"/>
+  </center>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+  <%= devise_error_messages! %>
+    <div class="div_base">
+
+    <div>
+      <center><h4>Avatar</h4></center>
+      <%= f.file_field :avatar, autocomplete: "off", :class => "inputField2" %>
+    </div>
+<br>
+      <div>
+        <center><h4>Email</h4></center>
+        <%= f.email_field :email, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %>
+        
+      </div>
+<br>
+      <div>
+        <center><h4>Username</h4></center>
+        <%= f.text_field :username, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %>
+        
+      </div>
+<br>
+      <div>
+        <center><h4>Displayed Name</h4></center>
+        <%= f.text_field :display_name, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %>
+        
+      </div>
+<br>
+
+    <div>
+      <center><h4>Phone Number</h4></center>
+      <%= f.telephone_field :number, autocomplete: "off", :class => "inputField2" %>
+    </div>
+<br>
+      <div>
+        <center><h4>Description</h4></center>
+        <%= f.text_area :description, autofocus: true, :class => "inputField2", :pattern=>".{3,}", :style => "resize:none" %>
+        
+      </div>
+
+<br>
+<div class="row">
+  <center><h4>Change background image</h4></center>
+  <div class="col-md-12">
+    <%= f.select(:bg, ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'], {}, { :class => "form-control", :id => "imgpicker", :style => "margin-top: 8px;position: relative;background-color: #ececec;bottom: 8px;width: 100%;border: none;border-radius:  0;/* padding-top: 10px; */margin-bottom: 0px;-webkit-appearance:  none;text-align:  center;letter-spacing:  1px;font-weight:  1000;padding-left: 30px;color: #{current_user.hex};text-transform:  uppercase;" }) %>
+    <img src="/<%= current_user.bg  %>.jpg" id="pic" style="width:50%;border-radius:10px;height:auto;z-index:900;transition:all 0.3s ease;display:block;margin:20px auto 5px auto"></img>
+
+  </div>
+</div>
+<br>
+      <div>
+        <center><h4>Color Theme</h4></center>
+        <%= f.color_field :hex, autofocus: true, :class => "inputField2", :pattern=>".{3,}", :style => "resize:none;height:50px" %>
+        
+      </div>
+      
+    <div style="padding-top: 40px;border-top: 2px solid #8e8e8e;border-bottom: 2px solid #8e8e8e;padding-bottom:40px;margin-top: 40px;">
+      
+            <div>
+      <center><h4>Change your password</h4></center>
+      <%= f.password_field :password, autocomplete: "off", :class => "inputField2" %>
+    </div>
+<br>
+    <div>
+      <center><h4>Confirm new password</h4></center>
+      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "inputField2" %>
+    </div>
+      </div>
+        
+        
+      <center>
+    <%= f.submit "UPDATE", :class => "btn-lg btn-primary", :style => "width:100%;margin-top:50px;margin-bottom:20px;", :id => "magic" %>
+      </center>
+    <% end %>
+    
+    <center>
+      <h3 style="border-top:2px solid #8e8e8e;padding-top:40px;padding-bottom:20px">Need to run?</h3>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn-lg btn-secondary", :style => "margin-bottom:20px" %></p>
+
+<%= link_to "Back", :back %>
+    </center>
+    </div>
+  <div class="col-md-2">
+  </div>
+  </div>
+  </div>
+
+
+<script>
+  document.getElementById("magic").onclick = function(){document.getElementById('bouncing').style.visibility = 'visible'};
+  
+  document.getElementById("imgpicker").onchange = function(){
+    document.getElementById('pic').style.opacity = 0;
+    setTimeout(function(){ document.getElementById('pic').src = "/" + document.getElementById("imgpicker").value + ".jpg" }, 1000);
+    setTimeout(function(){ document.getElementById('pic').style.opacity = 1 }, 1000);
+    };
+    
+</script>

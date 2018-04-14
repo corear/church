@@ -1,0 +1,111 @@
+
+
+<style>
+    body {
+background: 
+        linear-gradient(
+        <%= current_user.hex %>4d,
+        <%= current_user.hex %>4d
+        ), url("/<%= current_user.bg %>.jpg") no-repeat center center fixed;        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+    @keyframes bouncing-loader {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.1;
+    transform: translateY(-1rem);
+  }
+}
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  position:fixed;
+  background:rgba(0,0,0,0.8);
+  z-index:1000;
+  visibility:hidden;
+  align-items: center;
+}
+.bouncing-loader > div {
+  width: 2rem;
+  height: 2rem;
+  margin: 3rem 0.2rem;
+  background: #fff;
+  border-radius: 50%;
+  z-index:1001;
+  margin-top:5%;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bouncing-loader > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+</style>
+
+
+
+<div class="bouncing-loader" id="bouncing">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<%= render '/layouts/nav_user' %>
+
+<div class="container">
+    <div class="row post-container" style="overflow:visible;margin-top:40px;background:none">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-6" >
+            <center>
+                <a href="/@<%= current_user.username %>"><img src="<%= current_user.avatar.url(:medium) %>" style="max-width:100px;margin-top:-40px;background-color:white" class="raised rounded"/></a><br>
+                    <t1 style="text-shadow:0px 1px 5px <%= current_user.hex %>;-webkit-text-shadow:0px 1px 5px <%= current_user.hex %>;color:white;top:15px;position:relative"><%= current_user.display_name %></t1><br>
+                <a href="/@<%= current_user.username %>"> <t4 class="tag" style="position:relative;top:30px;left:7px;color:<%= current_user.hex %>;background-color:white;font-style:0.9rem">@<%= current_user.username %></t4></a>
+          </center>
+        </div>
+        <div class="col-sm-3">
+        </div>
+        
+            
+               
+    </div>
+    
+   <div style="margin-top:80px">
+        <% for @p in @featured %>
+        <%= render "/components/post" %>
+        <% end %>  
+        <center>
+            <a href="/all_posts?type=announcement" class="btn-lg btn-danger">See All Announcements</a>
+        </center>
+   </div>
+        
+    
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-top:50px">
+             <!--  <%= render "/components/top_users" %> -->
+               <%= render "/components/post_form" %>
+        
+         <div style="margin-top:20px;">
+             <% for @p in @posts %>
+        <%= render "/components/post" %>
+        <% end %>
+         </div>
+    </div>
+    <div class="col-sm-2"></div>
+    
+</div>
+<script>
+    document.title="Home | ICC Hub"
+    
+    document.getElementById("post").onclick = function(){document.getElementById('bouncing').style.visibility = 'visible'};
+</script>

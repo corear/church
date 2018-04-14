@@ -1,0 +1,39 @@
+    <a href="/post/<%= @p.id %>">
+        <div class="post-container">
+            <div class="row">
+                <div class='col-sm-12'>
+                    <% if @p.post_type == "Prayer" %>
+                      <p class='post-type' style="background-color: rgba(199,91,91,0.85)">PRAYER</p>
+                      <% elsif @p.post_type == "Praise"  %>
+                      <p class='post-type' style="background-color:#1ac9c9;">PRAISE</p>
+                      <% elsif @p.post_type == "Announcement"  %>
+                      <p class='post-type' style="background-color:#f95246;">ANNOUNCEMENT</p>
+                      <% elsif @p.post_type == "Transport"  %>
+                      <p class='post-type' style="background-color:#4dc751;">TRANSPORT</p>
+                      <% end %>
+                    
+                </div>
+            </div>
+          <div class="panel-body row">
+              <div class='col-sm-2'>
+                  <center><a href="/@<%= User.find(@p.user_id).username %>"><img src="<%= User.find(@p.user_id).avatar.url(:medium) %>" height="70px" width="70px" class="rounded"></img></a></center>
+              </div>
+              <div class="col-sm-7">
+                  <a style="color:<%= current_user.hex %>" href="/@<%= User.find(@p.user_id).username %>" class='post-title'><strong><%= User.find(@p.user_id).display_name %></strong>  &nbsp;<span style="font-size:10px;bottom:5px;background-color:<%= current_user.hex %>" class="tag">@<%= User.find(@p.user_id).username %></span></a>
+                     <% @con = simple_format(@p.content) %>
+                  <a href="/post/<%= @p.id %>" class='post-content'><%= @con %></a>
+              </div>
+               <div class="col-sm-3">
+                  <p class="post-date"><%= distance_of_time_in_words(@p.created_at,Time.now) %> ago</p>
+              </div>
+              </div>
+              <div class="row" style="padding-bottom:10px;padding-top:0;top:0">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-10">
+                 <%= render '/components/post_links' %>
+              </div>
+             
+            
+          </div>
+        </div>
+         </a>

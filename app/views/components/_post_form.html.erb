@@ -1,0 +1,18 @@
+<%= form_for(@newPost) do |f|  %>
+  <div style="margin-bottom:0px;height:100%;">
+  <div class="row post-container" style="padding-top:0px;padding-bottom:0px;height:150px;margin:0px;">
+    <div class="col-xs-10" style="padding:0">
+      <% if current_user.email == 'c_orear@icloud.com' || current_user.email == 's_orear@icloud.com' || current_user.email == 'ajeallen@hotmail.com' then %>
+      <%= f.select(:post_type, ['Update', 'Transport', 'Announcement', 'Praise', 'Prayer'], {}, { :class => "form-control", :style => "margin-top: 8px;position: relative;background-color: #ececec;bottom: 8px;width: 100%;border: none;border-radius:  0;/* padding-top: 10px; */margin-bottom: 0px;-webkit-appearance:  none;text-align:  center;letter-spacing:  1px;font-weight:  1000;padding-left: 30px;color: #{current_user.hex};text-transform:  uppercase;" }) %>
+    <% else %>
+    <%= f.select(:post_type, ['Update', 'Praise', 'Prayer'], {}, { :class => "form-control", :style => "margin-top: 8px;position: relative;background-color: #ececec;bottom: 8px;width: 100%;border: none;border-radius:  0;/* padding-top: 10px; */margin-bottom: 0px;-webkit-appearance:  none;text-align:  center;letter-spacing:  1px;font-weight:  1000;padding-left: 30px;color: #{current_user.hex};text-transform:  uppercase;" }) %>
+    <% end %>
+    <%= f.text_area :content, autofocus: true, :class => "noOutline", :style => "width: 98%;margin:  10px;height: 80px;border: none;/* padding: 20px; */resize: none;z-index: auto;position: relative;line-height: 20px;font-size: 2rem;transition: none;background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);padding-left:40px;padding-right:40px;line-height:25px", :placeholder => "What's on your mind?" %>
+    </div>
+     <div class="col-xs-2" style="padding:0;height:100%;">
+  <%= f.submit "POST", :class => "post-btn", :id => "post", :style => "height:100%;background-color:#{current_user.hex}" %>
+  </div>
+  </div>
+  </div>
+
+<% end %>

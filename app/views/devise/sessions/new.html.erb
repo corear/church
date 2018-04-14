@@ -1,0 +1,130 @@
+<style>
+ body {
+        background: 
+        linear-gradient(
+        rgba(105,186,181,0.7),
+        rgba(105,186,181,0.7)
+        ), url("/Option 4.jpg") no-repeat center center fixed;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+      .div_base{
+    transition:all 0.5s ease;
+    position:relative;
+    padding-left:100px;
+    padding-right:100px;
+    margin-top:50px;
+  }
+  
+    .row{
+    margin:0;
+    padding:0;
+  }
+  
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+  .col-md-4{
+    margin:0;
+    padding:10px;
+    background-color:rgba(200, 200, 200, 0.2);
+    color:#000;
+    transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);
+  }
+  
+  .text_overlay{
+    transition: all 0.3s ease;
+    color:#a0a0a0;
+    border:none;
+    border-bottom:2px solid #bfbfbf;
+  }
+  
+.inputField2{
+    margin-top:10px;
+    border-radius:5px;
+    border:none;
+    color:#333;
+    background:#dae8e8;
+    padding:13px;
+    font-size:1.2em;
+    font-weight:500;
+    width:100%;
+    transition: all 0.3s ease;
+    text-align:center;
+}
+
+input:focus + h4  {
+  position: relative;
+  top:-70px;
+  font-size:1em;
+}
+
+.inputField2:focus{
+  text-align:left;
+  background:none;
+  border-radius:0;
+  border-bottom:2px solid #dae8e8;
+}
+
+.glyphicon-lock{
+  top:2px;
+}
+
+.glyphicon-envelope{
+  top:2px;
+}
+
+@media (max-width:768px){
+  .div_base{
+        padding-left:0;
+        padding-right:0;
+    }
+    div.halfraised.col-md-8{
+      margin-top:-40px;
+      margin-bottom:20px;
+    }
+}
+
+
+</style>
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 halfraised" style="margin-top: 150px;margin-bottom: 150px;border-radius: 5px;background-color: #fff;padding: 20px;overflow:hidden;">
+    
+    <center>
+      <h2 style="font-weight:600;margin-bottom:20px;margin-top:20px;">Welcome back!</h2>
+    <h4>Login to your existing account and continue where you left off.</h4>
+    </center>
+    
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+    <div class="div_base">
+      <div>
+        <center><h4><span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;Your email</h4></center>
+        <%= f.email_field :email, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %>
+        
+      </div>
+<br>
+    <div>
+      <center><h4><span class="glyphicon glyphicon-lock"></span> &nbsp;&nbsp;Your password</h4></center>
+      <%= f.password_field :password, autocomplete: "off", :class => "inputField2" %>
+    </div>
+        
+        
+      <center>
+    <%= f.submit "SIGN IN", :class => "btn-lg btn-primary", :style => "width:100%;margin-top:50px;margin-bottom:20px;" %>
+      </center>
+    <% end %>
+    </div>
+  <div class="col-md-2">
+  </div>
+  </div>
+  </div>

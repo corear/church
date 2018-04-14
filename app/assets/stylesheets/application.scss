@@ -1,0 +1,608 @@
+/*
+ * This is a manifest file that'll bcompiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    ul.dropdown-menu > li > a{
+        color:white !important;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
+
+
+body {
+    background-color: rgba(212, 216, 212, 0.25);
+    font-family: 'Titillium Web', sans-serif
+}
+
+.turbolinks-progress-bar{
+    background-color:#fff;
+}
+
+t1{
+    font-weight:700;
+    font-size:38px;
+}
+
+t2{
+    font-weight:500;
+    font-size:2em;
+}
+
+t3{
+    font-weight:300;
+    font-size: 1.55em;
+}
+
+t4{
+    font-weight:300;
+    font-size: 1.25em;
+}
+
+a:hover{
+    text-decoration:none;
+    color:#1db8b8;
+}
+
+.navbar {
+    background: none;
+    border:none;
+    padding:20px;
+    color:white;
+}
+
+.form-control{
+    border-radius:0;
+    min-width:250px;
+    border:none;
+    border-bottom:3px solid white;
+    color:white;
+    font-size:1em;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    -webkit-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+    background:none;
+}
+
+.form-control:focus, .form-control:active{
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    border:none;
+    outline:none;
+    border-bottom:none;
+}
+
+.btn-primary{
+    padding-left:20px;
+    padding-right:20px;
+    border:none;
+}
+
+.btn-primary:active{
+    background-color:#1ac9c9;
+}
+
+.btn:focus{
+    outline:none;
+}
+
+.btn:active{
+    outline:none;
+}
+
+.noOutline:focus{
+    outline:none;
+}
+
+.noOutline:active{
+    outline:none;
+}
+
+.btn-primary{
+    background-color:#1ac9c9;
+    border:none;
+}
+
+.btn-secondary{
+    background-color:#fff;
+    color:#1ac9c9;
+    border:1px solid #1ac9c9;
+}
+
+.btn-primary:hover{
+    background-color:#1db8b8;
+}
+
+.btn-secondary:hover{
+    background-color:#f0f0f0;
+    color:#1ac9c9;
+}
+
+.notice{
+    
+    padding: 2.5rem;
+    text-align: center;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+    z-index:5000;
+}
+
+.alert{
+    padding: 2.5rem;
+    text-align: center;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+    z-index:5000;
+}
+
+#notice-wrapper{
+    
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 4999;
+    background: rgba(135,216,211,0.85)
+}
+
+#alert-wrapper{
+    
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 4999;
+    background: rgba(199,91,91,0.85)
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.input_field{
+    
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 4px;
+    border: 1px solid #1ac9c9;
+    margin: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    background:#fff;
+    color:#000;
+
+}
+
+.input_field:focus{
+    outline:none;
+    border-radius:0px;
+    border:none;
+    border-bottom:3px solid rgba(135,216,211,1);
+    color:#1ac9c9;
+}
+
+.post-title{
+    text-align:left;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.post-content{
+    text-align:left;
+    color:#000;
+    margin:0px 0;
+}
+
+p.post-content {
+    padding-top:10px;
+    line-height:25px;
+    font-size:1.7rem;
+}
+
+.post-content > p{
+    padding-top:10px;
+    line-height:25px;
+    font-size:1.5rem;
+    color:#000;
+    margin:0px 0;
+}
+
+.post-content:hover{
+    color:#000;
+}
+
+.post-links{
+    
+}
+
+.post-date{
+    opacity: 0.7;
+    font-size: 1.4rem;
+    text-align: center;
+    padding-right: 15px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+.wrapword{
+white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+white-space: -pre-wrap;      /* Opera 4-6 */
+white-space: -o-pre-wrap;    /* Opera 7 */
+white-space: pre-wrap;       /* css-3 */
+word-wrap: break-word;       /* Internet Explorer 5.5+ */
+white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+word-break: break-word;
+white-space: normal;
+
+}
+
+.post-type{
+    color:#fff;
+    font-size:16px;
+    padding:10px;
+    width:100%;
+    font-weight:300;
+    letter-spacing:5px;
+    text-align:center;
+    margin:0px;
+}
+
+.post-panel{
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.pray-button{
+    background:transparent;
+    padding:7px;
+    padding-right:0px;
+    padding-left:0px;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:2px;
+    border-radius:5px;
+    border: 1px solid rgba(199,91,91,0.85);
+    color: rgba(199,91,91,0.85);
+    overflow:hidden;
+    margin-right:20px;
+}
+
+.pray-button:hover{
+    color: rgba(199,91,91,1);
+    border: 1px solid rgba(199,91,91,1);
+}
+
+.pray-button:focus{
+    color: rgba(199,91,91,1);
+}
+
+.praise-button{
+    background:transparent;
+    padding:7px;
+    padding-left:0px;
+    padding-right:0px;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:2px;
+    border-radius:5px;
+    border: 1px solid #1ac9c9;
+    color: #1ac9c9;
+    overflow:hidden;
+    margin-right:20px;
+}
+
+.transport-button{
+    background:transparent;
+    padding:7px;
+    padding-left:0px;
+    padding-right:0px;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:2px;
+    border-radius:5px;
+    border: 1px solid #4dc751;
+    color: #4dc751;
+    overflow:hidden;
+    margin-right:20px;
+}
+
+.announcement-button{
+    background:transparent;
+    padding:7px;
+    padding-left:0px;
+    padding-right:0px;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:2px;
+    border-radius:5px;
+    border: 1px solid #f95246;
+    color: #f95246;
+    overflow:hidden;
+    margin-right:20px;
+}
+
+.praise-button:hover{
+    color:#1db8b8;
+    border: 1px solid #1db8b8;
+}
+
+.praise-button:focus{
+    color:#1db8b8;
+}
+
+.post-btn{
+    height: 100%;
+    border: none;
+    background-color: #1ac9c9;
+    color: #fff;
+    padding: 0;
+    letter-spacing:2px;
+    font-weight:400;
+    width: 103%;
+    margin:0;
+    font-size:2rem;
+}
+
+.action-count{
+    background-color: rgba(199,91,91,1);
+    color:#fff;
+    padding:7px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.action-count-praise{
+    background-color: #1ac9c9;
+    color:#fff;
+    padding:7px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.action-count-transport{
+    background-color: #4dc751;
+    color:#fff;
+    padding:7px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.action-count-announcement{
+    background-color: #f95246;
+    color:#fff;
+    padding:7px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.action-count-update{
+    background-color: #ccc;
+    color:#fff;
+    padding:7px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.update-button{
+        background:transparent;
+    padding:7px;
+    padding-left:0px;
+    padding-right:0px;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:2px;
+    border-radius:5px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    overflow:hidden;
+    margin-right:20px;
+}
+
+.profile-btn{
+    padding:10px;
+    padding-left:30px;
+    padding-right:30px;
+    margin-top:-85px;
+    font-size:20px;
+    font-weight:320;
+    letter-spacing:2px;
+    border-radius:30px;
+}
+
+.profile-btn-sm{
+    padding:8px;
+    font-size:20px;
+    font-weight:500;
+    width: 30px;
+    height: 30px;
+    line-height: 0px;
+    margin-top: 26px;
+    margin-left: -13px;
+}
+
+.raised{
+  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+}
+
+.rounded{
+  border-radius:50%;
+}
+
+.jumbotron{
+    font-size:inherit;
+}
+
+.raisedText{
+  text-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
+}
+
+.post-container{
+    border-radius:20px;
+    padding:0px;
+    overflow:hidden;
+    margin-bottom:30px;
+    background-color:white;
+}
+
+.tag{
+    background-color: #1ac9c9;
+    color: white;
+    padding: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 50px;
+    position: relative;
+    bottom: 2px;
+    margin-right:10px;
+}
+
+input:active, input:focus{
+    outline:none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    font-size:1.5em;
+    font-weight:800;
+    transition:all 0.3s ease;
+    color:white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color:white;
+}
+
+.navbar-default .navbar-brand{
+    color:white;
+    font-size:1.7em;
+    font-weight:900;
+    border: 2px solid white;
+    line-height: .6em;
+    border-radius: 5px;
+}
+
+.navbar-default .navbar-brand:hover{
+ color:white;   
+}
+
+.container-fluid{
+        padding-left: 7em;
+    padding-right: 7em;
+    padding-top: 2em;
+}
+
+@media (max-width: 425px) {
+    .container-fluid{
+        padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 1em;
+}
+.post-btn{
+    font-size:50%;
+}
+body{
+    text-align:center;
+}
+
+
+}
+
+button:active, button:focus{
+    outline:none;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+    background-color:white;
+}
+
+.navbar-default .navbar-toggle{
+    border:none;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:active, .navbar-default .navbar-toggle:focus{
+    background:none;
+}
+
+.navbar-collapse{
+    box-shadow:none;
+    border:none;
+}
+
+.navbar-form{
+    border:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+    background:none;
+}
+
+.panel-body{
+    padding:25px;
+}

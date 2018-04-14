@@ -1,0 +1,74 @@
+<% if !user_signed_in? %>
+<style>
+    body {
+        background: 
+        linear-gradient(
+        rgba(105,186,181,0.7),
+        rgba(105,186,181,0.7)
+        ), url("/Option 4.jpg") no-repeat center center fixed;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+    h1{
+        color:white;
+        font-weight: 700;
+    }
+    
+    .container-index {
+        margin-right:10%;
+        margin-left:10%;
+    }
+    
+    .text {
+        color:white;
+        font-weight:300;
+        font-size:150%;
+    }
+    
+    .footer-lines {
+        text-align:center;
+        color: white;
+        font-size:75%;
+    }
+    .log-in {
+        float:right;
+        width:300px;
+        height:150px;
+        margin-top:7.5%;
+    }
+    .sign-up {
+        float:right;
+        width:300px;
+        height:250px;
+    }
+    
+    
+</style>
+
+<div class="container">
+<div class="container-index row" style = "margin-top:200px;">
+<div class="col-sm-12">
+    <center>
+<h1>Welcome to the ICC Hub.</h1>
+<p class='text'>
+    Connect with International Christian Center volunteers online.<br>Keep up with important announcements and transportation information.<br>Share prayers and praises with the group.
+</p></center>
+
+<%= link_to("SIGN UP", new_user_registration_path, :class => "btn btn-secondary navbar-btn", :style => "width:100%; padding: 20px;font-size:20px;letter-spacing:1px;font-weight:700px;") %>
+<%= link_to("LOG IN", new_user_session_path, :class => "btn btn-secondary navbar-btn", :style => 'width:100%; padding:20px;font-size:20px;letter-spacing:1px;font-weight:700px;') %>
+
+<center>
+    <div style="margin-top:100px;margin-bottom:20px;">
+    <a href="http://illumin4te.herokuapp.com/"><p class="text">An <span><img src="http://illumin4te.herokuapp.com/ILLUMIN4TE_512_White.png" style="height:100px;width:100px;"/></span> project.</p></a>
+</div>
+</center>
+</div>
+</div>
+</div>
+<% else %>
+    <script>document.location="/home"</script>
+<% end %>

@@ -1,0 +1,85 @@
+<style>
+    body {
+background: 
+        linear-gradient(
+        <%= current_user.hex %>4d,
+        <%= current_user.hex %>4d
+        ), url("/<%= current_user.bg %>.jpg") no-repeat center center fixed;        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+    .btn-primary{
+  background-color:<%= current_user.hex %>;
+}
+.btn-primary:hover{
+  background-color:<%= current_user.hex %>;
+}
+.btn-secondary{
+  border:1px solid <%= current_user.hex %>;
+  color:<%= current_user.hex %>;
+}
+.btn-secondary:hover{
+    color:<%= current_user.hex %>;
+}
+</style>
+
+<%= render '/layouts/nav_user' %>
+<div class="container" style="padding:20px">
+
+<center>
+    <div class="row">
+<div class="panel panel-default post-panel col-sm-12">
+<% if @type == "users" %>
+<span><p class="btn btn-primary" style="margin:10px;" >USERS</p></span>
+<% else %>
+<span><a href="/search/users/<%= @query %>" class="btn btn-secondary" style="margin:10px;" >USERS</a></span>
+<% end %>
+<% if @type == "posts" %>
+<span><p class="btn btn-primary" style="margin:10px;" >POSTS</p></span>
+<% else %>
+<span><a href="/search/posts/<%= @query %>" class="btn btn-secondary" style="margin:10px;" >POSTS</a></span>
+<% end %>
+</div>
+</div>
+</center>
+
+
+    <div class="row">
+<div class="panel panel-default post-panel col-sm-12">
+<h1 style="margin-top:10px">Your search for "<%= @query %>" under <%= @type %>:</h1>
+</div>
+</div>
+
+<% if @type == "users" %>
+<% for @u in @users do %>
+               <div class="row">
+                   <div class="panel panel-default post-panel col-sm-12" style="height:100px;">
+                   <div class="col-sm-3">
+                   <center><a href="/@<%= @u.username %>"><img src="<%= @u.avatar.url(:medium) %>" style="width:80px;height:80px;border-radius:50%;margin-top:10px;margin-left:10px;"/></a></center>
+                   </div>
+                       
+                        <div class="col-sm-5" style="margin-top:5px;">
+                            <center>
+                       <a href="/@<%= @u.username %>"><h1 style="font-size:18px;color:#000"><%= @u.display_name %></h1></a>
+                       <a href="/@<%= @u.username %>" style="font-size:14px;color:<%= current_user.hex %>">@<%= @u.username %></a>
+                       </center>
+                       </div>
+                  </div>
+                  </div>
+               <% end %>
+               
+               <% elsif @type == 'posts' %>
+               <% for @p in @posts do %>
+               <%= render "/components/post" %>
+               <% end %>
+               <% end %>
+               
+               </div>
+
+<script>
+    document.title = 'Search for "<%= @query %>" | ICC Hub'
+    
+</script>

@@ -1,0 +1,46 @@
+<%= render '/layouts/nav_user' %>
+
+<div class="top-img jumbotron" style="text-align:center; background: linear-gradient(<%= User.find_by_username(@username).hex %>4d,<%= User.find_by_username(@username).hex %>4d), url('/<%= User.find_by_username(@username).bg %>.jpg') no-repeat center center fixed; width:100%; margin-top:-170px;">
+        <div style="margin-top:200px;margin-bottom:200px;">
+        <img class="raised rounded"src="<%= User.find_by_username(@username).avatar.url(:medium) %>" style="max-width:180px;z-index:6;float:top;margin-top:-30px;background-color:white"><br><br>
+        <t1 style="color:white" class="raisedText"><%= User.find_by_username(@username).display_name %></t1><br>
+         <t4 style="color:rgba(255,255,255,0.8)" class="raisedText">@<%= @username %></t4>
+        </div>
+        <div style="margin-top:-150px;">
+             <div style="display:inline-block;margin-left:25px;margin-right:25px;">
+                <t1 style="color: white" class="raisedText"><%= number_with_delimiter(@hot.count, :delimiter => ',') %></t1><br>
+                <t4 style="color:white" class="raisedText"><%= params[:type] %></t4>
+            </div>
+        </div>
+         
+         
+         </div>
+
+<div class="container" style="padding:50px">
+   
+
+              
+<div class="row" style="margin-top:0px;">
+    
+    
+    <% for @u in @hot do %>
+               <div class="row">
+                   <div class="panel panel-default post-panel col-sm-12" style="height:100px">
+                   <div class="col-sm-3">
+                   <center><a href="/@<%= @u.username %>"><img src="<%= @u.avatar.url(:medium) %>" style="width:80px;height:80px;border-radius:50%;margin-top:10px;margin-left:10px;"/></a></center>
+                   </div>
+                       
+                        <div class="col-sm-5" style="margin-top:5px;">
+                            <center>
+                       <a href="/@<%= @u.username %>"><h1 style="font-size:18px;color:#000"><%= @u.display_name %></h1></a>
+                       <a href="/@<%= @u.username %>" style="font-size:14px;color:#1ac9c9">@<%= @u.username %></a>
+                       </center>
+                       </div>
+                  </div>
+                  </div>
+               <% end %>
+</div>
+<script>
+    document.title = "@<%= @username %> | ICC Hub"
+    
+</script>

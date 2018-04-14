@@ -1,0 +1,22 @@
+---
+development:
+  cloud_name: unafire
+  api_key: '626267218758433'
+  api_secret: nk2_vcMId84KyyrcMkNLnHxM5Yk
+  enhance_image_tag: true
+  static_image_support: false
+  secure: true
+production:
+  cloud_name: unafire
+  api_key: '626267218758433'
+  api_secret: nk2_vcMId84KyyrcMkNLnHxM5Yk
+  enhance_image_tag: true
+  static_image_support: true
+  secure: true
+test:
+  cloud_name: unafire
+  api_key: '626267218758433'
+  api_secret: nk2_vcMId84KyyrcMkNLnHxM5Yk
+  enhance_image_tag: true
+  static_image_support: false
+  secure: true
