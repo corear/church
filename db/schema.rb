@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413215255) do
+ActiveRecord::Schema.define(version: 20180414235356) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20180413215255) do
     t.string   "number"
     t.string   "bg",                     default: "Option 4"
     t.string   "hex",                    default: "#1ac9c9"
+    t.string   "verse"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

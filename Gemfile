@@ -8,6 +8,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
+
+gem 'bible_gateway'
 # Use sqlite3 as the database for Active Record
 # ----------------------------------- #
 # MUST USE 'pg' GEM FOR HEROKU, BUT 'sqlite3' FOR DEVELOPMENT

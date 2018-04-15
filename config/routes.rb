@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/signin" => "devise/sessions#new" # custom path to login/sign_in
     get "/register" => "devise/registrations#new", as: "new_user_registration" # custom path to sign_up/registration
+    get "/settings" => "devise/registrations#edit", as: "edit_user_registration" # custom path to sign_up/registration
     get '/secure/password_update' => "devise/passwords#edit"
   end
   
@@ -37,6 +38,10 @@ Rails.application.routes.draw do
   get '/post/:id' => 'pages#postpage'
   
   get '/search/:id1/:id' => 'pages#search_handler'
+  
+  get '/sermons' => 'pages#sermons_list'
+  
+  get '/sermons/:id' => 'pages#sermon'
   
   
   get :send_custom, to: 'pages#send_custom', as: :send_custom

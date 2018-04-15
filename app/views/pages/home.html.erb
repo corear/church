@@ -50,6 +50,14 @@ background:
 .bouncing-loader > div:nth-child(3) {
   animation-delay: 0.4s;
 }
+
+.passage-content > div > h1 > .passage-display-bcv{
+    color: <%= current_user.hex %> !important;
+}
+
+.passage-content > div > p > .chapternum, sup{
+    background-color: <%= current_user.hex %> !important;;
+}
 </style>
 
 
@@ -88,7 +96,7 @@ background:
             <a href="/all_posts?type=announcement" class="btn-lg btn-danger">See All Announcements</a>
         </center>
    </div>
-        
+        <%= simple_format(@verse) %>
     
     <div class="col-sm-2"></div>
     <div class="col-sm-8" style="margin-top:50px">

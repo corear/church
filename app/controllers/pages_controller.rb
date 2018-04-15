@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   
+  
+  
+  
   # back-end code for pages/index
   def index
   end
@@ -10,6 +13,14 @@ class PagesController < ApplicationController
      @posts = Post.all.where('post_type != ?', 'Announcement')
      @featured = Post.all.where('post_type = ?', 'Announcement').where('created_at > ?', 1.week.ago).take(1)
      @newPost = Post.new
+     
+     require "rubygems"
+      require "json"
+     
+     b = BibleGateway.new # defaults to :king_james_version, but can be initialized to different version
+      b.version = :new_king_james_version
+      @verse = JSON.parse(b.lookup(current_user.verse).to_json)['content']
+    
   end
   
   def send_custom
@@ -31,7 +42,21 @@ class PagesController < ApplicationController
     
     @posts = Post.all.where('user_id = ?', User.find_by_username(params[:id]).id)
     @newPost = Post.new
+    
+    require "rubygems"
+      require "json"
+      if (User.find_by_username(params[:id]).verse) then
+        b = BibleGateway.new # defaults to :king_james_version, but can be initialized to different version
+        b.version = :new_king_james_version
+        @verse = JSON.parse(b.lookup(User.find_by_username(params[:id]).verse).to_json)['content']
+      else
+        @verse = "This user has not selected a favorite verse... Apparently they like to keep an air of mystery about them. 🤔"
+      end
   
+  end
+  
+  def sermons_list
+    @sermons = ['psalm-23','a-plea-for-purity-part-1']
   end
   
   def list

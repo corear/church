@@ -79,6 +79,33 @@ div.halfraised.col-md-8{
 .col-sm-7 > a > .tag{
     background-color: <%= User.find_by_username(@username).hex %> !important;
 }
+
+.passage-content{
+    background:  none;
+    margin-bottom:-70px;
+}
+
+.passage-content > div > h1 > .passage-display-bcv{
+    margin:  -70px 0 -50px 0;
+}
+
+.passage-content > div > h1 > .passage-display-version{
+    display:  none;
+}
+
+.passage-content > div > p{
+    margin-bottom:0;
+}
+
+.passage-content > div > p > .chapternum{
+    color:  white;
+    border-radius:  50px;
+    padding:  5px 5px;
+    text-align:  center;
+    display: block;
+    margin:  0 0 20px 0;
+}
+
 </style>
 
 <div class="bouncing-loader" id="bouncing">
@@ -135,8 +162,7 @@ div.halfraised.col-md-8{
 <div class="row" style="margin:20px;margin-bottom:40px">
     <div class="col-xs-12">
         <center>
-            <t1>About Me</t1><br><br>
-            <t3 style="color:#777;letter-spacing:.6px;width:500px;line-height:32px;"><% if !User.find_by_username(@username).description || User.find_by_username(@username).description.length <= 0 then %>This user has not written anything about themselves... Apparently they like to keep an air of mystery about them. 🤔<% else %><%= User.find_by_username(@username).description %><% end %></t3>
+            <t3 style="color:#777;letter-spacing:.6px;width:500px;line-height:32px;"><%= simple_format(@verse) %></t3>
         </center>
         </div>
 </div>
