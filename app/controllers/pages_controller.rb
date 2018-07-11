@@ -19,7 +19,7 @@ class PagesController < ApplicationController
      
      b = BibleGateway.new # defaults to :king_james_version, but can be initialized to different version
       b.version = :new_king_james_version
-      if current_user.verse then
+      if current_user.verse != "" then
         @verse = JSON.parse(b.lookup(current_user.verse).to_json)['content']
       else
         @verse = nil
