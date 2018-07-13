@@ -1,15 +1,12 @@
 <style>
  body {
-        background: 
-        linear-gradient(
-        rgba(105,186,181,0.7),
-        rgba(105,186,181,0.7)
-        ), url("/Option 4.jpg") no-repeat center center fixed;
+        background: url("https://images.unsplash.com/photo-1515162305285-0293e4767cc2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=26b54688586dda2f1288a91bada60d7e&auto=format&fit=crop&w=3302&q=80") no-repeat center center fixed;
         
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+        transition:all 1s;
     }
     
       .div_base{
@@ -47,28 +44,20 @@
 .inputField2{
     margin-top:10px;
     border-radius:5px;
-    border:none;
-    color:#333;
-    background:#dae8e8;
-    padding:13px;
-    font-size:1.2em;
-    font-weight:500;
+    border:2px solid white;
+    color:#fff;
+    background:none;
+    padding:8px 13px;
+    font-size:1.5em;
+    font-weight:600;
     width:100%;
     transition: all 0.3s ease;
-    text-align:center;
-}
-
-input:focus + h4  {
-  position: relative;
-  top:-70px;
-  font-size:1em;
+    text-align:left;
+    letter-spacing:1px;
 }
 
 .inputField2:focus{
-  text-align:left;
-  background:none;
-  border-radius:0;
-  border-bottom:2px solid #dae8e8;
+  
 }
 
 .glyphicon-lock{
@@ -90,57 +79,80 @@ input:focus + h4  {
     }
 }
 
+body:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 1s; /* control the speed of fading here*/
+  background: linear-gradient(
+        rgba(105,186,181,0.6),
+        rgba(105,186,181,0.6)
+        );
+        z-index:-1;
+}
+
+body.bc:before {
+  opacity: 1;
+}
+
+center > h4{
+  letter-spacing:2px;
+  color:white;
+  font-weight:600;
+}
+
 
 </style>
 
-<div class="container">
+<div class="container" id="holder" style="opacity:0;transition:all 1s;margin-top:-20px">
   <div class="row">
   <div class="col-md-2">
+    
   </div>
-  <div class="col-md-8 halfraised" style="margin-top: 150px;margin-bottom: 150px;border-radius: 5px;background-color: #fff;padding: 20px;overflow:hidden;">
+  <div class="col-md-8 halfraised" style="margin-top: 150px;margin-bottom: 150px;padding: 20px;overflow:hidden;">
     
     <center>
-      <h2 style="font-weight:600;margin-bottom:20px;margin-top:20px;">Welcome!</h2>
-    <h4>Signup to create your free account.</h4>
+      <div class="row">
+        <h1 id="headertext" style="opacity:0;margin-top:20px;text-transform: uppercase;letter-spacing:  3px;font-weight:  400;font-size:  3rem;color:white">Get started with a free account<br><h4 style="color:white;">or <a style="border-bottom:2px solid #fff" href="/signin">sign in</a> to an existing one</h4></h1>
+    </div>
     </center>
     
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
     <div class="div_base">
       <div>
-        <center><h4><span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;Your email</h4></center>
-        <%= f.email_field :email, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %>
+        <center><h4>EMAIL</h4></center>
+        <%= f.email_field :email, autofocus: true, :class => "inputField2", :pattern=>".{3,}", :value => "#{params[:email]}" %>
         
       </div>
 <br>
     <div>
-      <center><h4><span class="glyphicon glyphicon-lock"></span> &nbsp;&nbsp;Your password</h4></center>
+      <center><h4>PASSWORD</h4></center>
       <%= f.password_field :password, autocomplete: "off", :class => "inputField2" %>
     </div>
 <br>
     <div>
-      <center><h4><span class="glyphicon glyphicon-lock"></span> &nbsp;&nbsp;Confirm password</h4></center>
+      <center><h4>CONFIRM PASSWORD</h4></center>
       <%= f.password_field :password_confirmation, autocomplete: "off", :class => "inputField2" %>
     </div>
 <br>
     <div>
-      <center><h4><span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Username</h4></center>
+      <center><h4>USERNAME</h4></center>
       <%= f.text_field :username, autocomplete: "off", :class => "inputField2" %>
     </div>
 <br>
     <div>
-      <center><h4><span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Full Name</h4></center>
-      <%= f.text_field :display_name, autocomplete: "off", :class => "inputField2" %>
-    </div>
-<br>
-    <div>
-      <center><h4><span class="glyphicon glyphicon-phone"></span> &nbsp;&nbsp;Phone Number</h4></center>
-      <%= f.telephone_field :number, autocomplete: "off", :class => "inputField2" %>
+      <center><h4>FULL NAME</h4></center>
+      <%= f.text_field :display_name, autocomplete: "off", :class => "inputField2", :value => "#{params[:name]}" %>
     </div>
         
         
       <center>
-    <%= f.submit "SIGN UP", :class => "btn-lg btn-primary", :style => "width:100%;margin-top:50px;margin-bottom:20px;" %>
+    <%= f.submit "Get Started!", :class => "btn-lg btn-secondary", :style => "opacity:1;border: none;color: #ffffff;transition:opacity 1s, margin-left 0.3s;letter-spacing:2px;position:relative;top:20px;background-color: #5ca1a2;/* margin-left:7px; */padding: 15px 20px;margin: 50px 0;min-width: 50%;" %>
       </center>
     <% end %>
     </div>
@@ -148,3 +160,21 @@ input:focus + h4  {
   </div>
   </div>
   </div>
+  
+  <script>
+  
+  function changeText(){
+    
+    $('body').addClass('bc');
+    document.getElementById("headertext").style.opacity = "1";
+    
+    setTimeout(function(){
+      document.getElementById("holder").style.opacity = "1";
+        document.getElementById("holder").style.marginTop = "0";
+    }, 1000);
+        
+        
+    }
+    
+    window.onload = setTimeout(changeText, 100);
+    </script>

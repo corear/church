@@ -1,21 +1,10 @@
 <% if !user_signed_in? %>
 <style>
-    body {
-        background: 
-        linear-gradient(
-        rgba(105,186,181,0.7),
-        rgba(105,186,181,0.7)
-        ), url("/Option 4.jpg") no-repeat center center fixed;
-        
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
     
-    h1{
+    #headertext{
         color:white;
         font-weight: 700;
+        transition: all 1s ;
     }
     
     .container-index {
@@ -46,29 +35,176 @@
         height:250px;
     }
     
+ body {
+        background: url("https://images.unsplash.com/photo-1515162305285-0293e4767cc2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=26b54688586dda2f1288a91bada60d7e&auto=format&fit=crop&w=3302&q=80") no-repeat center center fixed;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        transition:all 1s;
+    }
     
+      .div_base{
+    transition:all 0.5s ease;
+    position:relative;
+    padding-left:100px;
+    padding-right:100px;
+    margin-top:50px;
+  }
+  
+    .row{
+    margin:0;
+    padding:0;
+  }
+  
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+  .col-md-4{
+    margin:0;
+    padding:10px;
+    background-color:rgba(200, 200, 200, 0.2);
+    color:#000;
+    transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);
+  }
+  
+  .text_overlay{
+    transition: all 0.3s ease;
+    color:#a0a0a0;
+    border:none;
+    border-bottom:2px solid #bfbfbf;
+  }
+  
+.inputField2{
+    margin-top:10px;
+    border-radius:5px;
+    border:2px solid #cecece;
+    color:#808080;
+    background:none;
+    padding:8px 13px;
+    font-size:1.5em;
+    font-weight:600;
+    width:65%;
+    transition: all 0.3s ease;
+    text-align:left;
+    letter-spacing:1px;
+}
+
+input:focus + h4  {
+  position: relative;
+  top:-70px;
+  font-size:1em;
+}
+
+.inputField2:focus{
+  text-align:left;
+  border:2px solid #a1d2e2;
+  color:#5da7bf;
+}
+
+.glyphicon-lock{
+  top:2px;
+}
+
+.glyphicon-envelope{
+  top:2px;
+}
+
+@media (max-width:768px){
+  .div_base{
+        padding-left:0;
+        padding-right:0;
+    }
+    div.halfraised.col-md-8{
+      margin-top:-40px;
+      margin-bottom:20px;
+    }
+}
+
+body:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 1s; /* control the speed of fading here*/
+  background: linear-gradient(
+        rgba(105,186,181,0.7),
+        rgba(105,186,181,0.7)
+        );
+        z-index:-1;
+}
+
+body.bc:before {
+  opacity: 1;
+}
+
+#btn:hover{
+    background:none;
+}
+
 </style>
 
-<div class="container">
-<div class="container-index row" style = "margin-top:200px;">
-<div class="col-sm-12">
-    <center>
-<h1>Welcome to the Christ Fellowship member center.</h1>
-<p class='text'>
-    Connect with Christ Fellowship members online.<br>Keep up with important announcements and information.<br>Share prayers and praises with the church.
-</p></center>
 
-<%= link_to("SIGN UP", new_user_registration_path, :class => "btn btn-secondary navbar-btn", :style => "width:100%; padding: 20px;font-size:20px;letter-spacing:1px;font-weight:700px;") %>
-<%= link_to("LOG IN", new_user_session_path, :class => "btn btn-secondary navbar-btn", :style => 'width:100%; padding:20px;font-size:20px;letter-spacing:1px;font-weight:700px;') %>
+<div class="container-fluid">
+    <div class="row">
+        <h1 id="headertext" style="opacity:0;margin-top:280px;text-transform: uppercase;letter-spacing:  3px;font-weight:  400;font-size:  6rem;">How do you connect<br>millions of Christians worldwide?</h1>
+    </div>
+    <div class="row">
+        <h4 style="width: 50%;color: #f3f3f3;opacity: 0;transition: all 1s;line-height: 30px;padding-left: 7px;letter-spacing: 1px;" id="desc">We are helping the international Christian community reimagine what it means to keep in touch, pray, and praise together.</h4>
+    </div>
+    <div class="row">
+        <a href="/register" id="btn" class="btn-secondary btn-lg" style="opacity:0; border:2px solid #fff; color: #fff; transition:opacity 1s, margin-left 0.3s; letter-spacing:2px;position:relative;top:20px;margin-left:7px;padding:8px 15px">JOIN US</a>
+    </div>
 
 <center>
-    <div style="margin-top:100px;margin-bottom:20px;">
-    <a href="http://illumin4te.herokuapp.com/"><p class="text">An <span><img src="http://illumin4te.herokuapp.com/ILLUMIN4TE_512_White.png" style="height:100px;width:100px;"/></span> project.</p></a>
-</div>
+    <div style="margin-top:150px;margin-bottom:20px;">
+        <a href="http://illumin4te.herokuapp.com/"><p class="text" id="foot" style="font-size:5rem;margin-top:-350px;transition:all 1s">An <span><img src="http://illumin4te.herokuapp.com/ILLUMIN4TE_512_White.png" style="height:100px;width:100px;"/></span> project.</p></a>
+    </div>
 </center>
+
 </div>
-</div>
-</div>
+
+<script>
+    function redirect(){
+        document.location="/register?name=" + document.getElementById("fullName").value + "&email=" + document.getElementById("mailer").value
+    }
+    
+    function changeText(){
+        document.getElementById("foot").style.fontSize = "150%";
+        document.getElementById("foot").style.marginTop = "0";
+        $('body').addClass('bc');
+        
+        setTimeout(function() {
+          document.getElementById("desc").style.opacity = 1;
+        },2000);
+        
+        
+        setTimeout(function() {
+          document.getElementById("headertext").style.opacity = 1;
+            document.getElementById("headertext").style.marginTop = "300px";  
+            
+            setTimeout(function() {
+          document.getElementById("desc").style.opacity = 1;
+          
+          setTimeout(function() {
+          document.getElementById("btn").style.opacity = 1;
+        },2000);
+        
+        },2000);
+        
+        
+        },500);
+    }
+    
+    window.onload = setTimeout(changeText, 2000);
+</script>
+
+
 <% else %>
     <script>document.location="/home"</script>
 <% end %>

@@ -39,10 +39,6 @@ Rails.application.routes.draw do
   
   get '/search/:id1/:id' => 'pages#search_handler'
   
-  get '/sermons' => 'pages#sermons_list'
-  
-  get '/sermons/:id' => 'pages#sermon'
-  
   
   get :send_custom, to: 'pages#send_custom', as: :send_custom
   
