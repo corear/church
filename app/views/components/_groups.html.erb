@@ -1,0 +1,125 @@
+<style>
+    .bgr {
+  justify-content: center;
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:1003;
+  opacity:0;
+  visibility:hidden;
+  align-items: center;
+  transition: opacity 1s; /* control the speed of fading here*/
+  
+}
+
+.bgr:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 1s; /* control the speed of fading here*/
+  background: linear-gradient(
+        rgba(80,80,80,0.7),
+        rgba(50,50,50,0.7)
+        );
+        z-index:-1;
+}
+
+.bgr:before {
+  opacity: 1;
+}
+
+.bc{
+    visibility:visible;
+    opacity:1;
+}
+
+#frame{
+  transition: padding-top 0.5s; /* control the speed of fading here*/
+  padding-top:10px;
+  width:100%;
+  height:100%;
+  position:absolute;
+  overflow-y:scroll;
+}
+
+.post-container{
+    border-radius:12px;
+}
+
+.panel-body{
+    padding:10px;
+}
+
+.group-content{
+    
+     font-weight: 200;
+    text-transform: capitalize;
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+.group-date{
+    line-height:45px;
+    font-size:2rem;
+}
+
+</style>
+
+<% @groups = current_user.groups.split(',') %>
+
+<div class="bgr" id="bgr">
+  
+  <div id="frame">
+      <h1 style="border-bottom:3px solid white;color:white;letter-spacing:3px;margin-left:50%;transform:translateX(-50%);width:auto;display:inline-block;padding-bottom:6px">GROUPS</h1>
+              <div>
+                  <h4 class="tag2" style="background-color:<%= current_user.hex %>;"><%= @groups.count %></h4>
+              </div>
+      
+  <% if @groups.count > 0 then %>
+             <% for i in 0..@groups.count-1 %>
+             
+            <% @groupy = Group.find(@groups[i]) %>
+                 <a href="/group/<%= @groupy.id %>">
+        <div class="row frame-holder">
+            <div class="col-xs-4"></div>
+            <div class="post-container col-xs-4" style="margin:0">
+          <div class="raised panel-body row">
+              <div class='col-xs-2'>
+                  <img class="profilePic halfraised" style="width:100%;height:100%;border-radius:12px" src="<%= User.find(@groupy.owner).avatar.url(:medium) %>">
+              </div>
+              <div class="col-xs-7">
+                  <a href="/group/<%= @groupy.id %>" class='group-content' style="color:black"><%= @groupy.name %></a><br>
+                  <a href="/group/<%= @groupy.id %>" class='group-content'style="text-transform:none;font-size:1.5rem;color:#909090;margin-left:1px">Owned by @<%= User.find(@groupy.owner).username %></a>
+              </div>
+               <div class="col-xs-3">
+                  <p class="group-date"><i class="fas fa-users"></i>&nbsp;<%= @groupy.members.split(',').count %></p>
+              </div>
+              </div>
+        </div>
+        <div class='col-xs-4'></div>
+        </div>
+         </a>
+         
+         <br>
+         
+         <% end %>
+        <% end %>
+        
+        </div>
+</div>
+
+<script>
+    $('#bgr').click(function(){
+        document.getElementById("frame").style.paddingTop = "10px";
+        document.getElementById("bgr").style.opacity = "0";
+        
+        setTimeout(function() {
+          $('#bgr').removeClass("bc");
+        },500);
+     
+    });
+</script>

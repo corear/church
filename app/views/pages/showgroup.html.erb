@@ -1,0 +1,139 @@
+
+
+<style>
+    body {
+background: 
+        linear-gradient(
+        <%= current_user.hex %>4d,
+        <%= current_user.hex %>4d
+        ), url("/<%= current_user.bg %>.jpg") no-repeat center center fixed;        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+    @keyframes bouncing-loader {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.1;
+    transform: translateY(-1rem);
+  }
+}
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  position:fixed;
+  background:rgba(0,0,0,0.8);
+  z-index:1000;
+  visibility:hidden;
+  align-items: center;
+}
+.bouncing-loader > div {
+  width: 2rem;
+  height: 2rem;
+  margin: 3rem 0.2rem;
+  background: #fff;
+  border-radius: 50%;
+  z-index:1001;
+  margin-top:5%;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bouncing-loader > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.passage-content > div > h1 > .passage-display-bcv{
+    color: <%= current_user.hex %> !important;
+}
+
+.passage-content > div > p > .chapternum, sup{
+    background-color: <%= current_user.hex %> !important;;
+}
+
+.raisedText{
+    text-align:center;
+    display:inline-block;
+    margin-left:50%;
+    transform:translateX(-50%);
+    padding:10px 15px;
+    border-radius:60px;
+    font-size:3rem;
+}
+</style>
+
+
+
+<div class="bouncing-loader" id="bouncing">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<%= render '/layouts/nav_user' %>
+
+
+
+<div class="container">
+    <div class="row post-container" style="overflow:visible;margin-top:40px;background:none">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" >
+            <center>
+                <t1 style="color:white;position:relative;text-transform:capitalize"><%= @g.name %></t1><br>
+                <t3 style="color:white;display:inline-block;border-top:1px solid white;border-bottom:1px solid white;margin: 20px 0;padding: 20px 0 10px 0;"><%= simple_format(@g.description) %></t3>
+            </center>
+          
+            <div style="margin-top:20px" class="row">
+              <div class="col-xs-4"></div>
+              <div class="col-xs-4">
+                  <t1 style="color:white;background-color:<%= current_user.hex %>;line-height:30px;" class="raisedText halfraised"><%= @g.members.split(',').count %></t1><br><t4 style="color:white;font-size:1.8rem;font-weight:300;" class="raisedText"><%= "Member".pluralize(@g.members.split(',').count) %></t4>
+              </div>
+              <div class="col-xs-4"></div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    
+    <% if @apart == true then %>
+        <center>
+            <% if @g.owner == current_user.id then %>
+                <%= link_to "Edit Group", edit_group_path(:id => params[:groupid]),  {:style=>"margin:10px;color:white;background-color:#{current_user.hex};border:none", :class=>"halfraised btn-lg btn-secondary"} %>
+            <% end %>
+            <%= link_to "Leave Group", {:controller => :groups, :action => :leave}, {:style=>"margin:10px;color:white;background-color:#{current_user.hex};border:none", :class=>"halfraised btn-lg btn-secondary"} %>
+        </center>
+    
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-top:50px">
+             <!--  <%= render "/components/top_users" %> -->
+               <%= render "/components/post_form" %>
+        
+         <div style="margin-top:20px;">
+             <% for @p in @posts %>
+        <%= render "/components/post" %>
+        <% end %>
+         </div>
+    </div>
+    <div class="col-sm-2"></div>
+    
+    <% else %>
+        <center>
+            <%= link_to "Join Group", {:controller => :groups, :action => :join}, {:style=>"color:white;background-color:#{current_user.hex};border:none", :class=>"halfraised btn-lg btn-secondary"} %>
+        </center>
+    <% end %>
+    
+</div>
+
+
+<script>
+    document.title="Group"
+    
+    document.getElementById("post").onclick = function(){document.getElementById('bouncing').style.visibility = 'visible'};
+</script>

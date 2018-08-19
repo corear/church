@@ -9,9 +9,14 @@ class PagesController < ApplicationController
   
   # back-end code for pages/home
   def home
+    
+    
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
-     @posts = Post.all.where('post_type != ?', 'Announcement')
-     @featured = Post.all.where('post_type = ?', 'Announcement').where('created_at > ?', 1.week.ago).take(1)
+    @groups = current_user.groups.split(',')
+    @groupPosts = Post.where(groupid: @groups)
+     @ownPosts = current_user.posts.where('groupid IS ?', nil)
+     @followingPosts = current_user.following.collect{|u| u.posts}.flatten
+     @posts = (@ownPosts + @followingPosts + @groupPosts).sort_by(&:created_at).reverse
      @newPost = Post.new
      
      require "rubygems"
@@ -19,7 +24,7 @@ class PagesController < ApplicationController
      
      b = BibleGateway.new # defaults to :king_james_version, but can be initialized to different version
       b.version = :new_king_james_version
-      if current_user.verse != "" then
+      if current_user.verse != "" && current_user.verse != nil then
         @verse = JSON.parse(b.lookup(current_user.verse).to_json)['content']
       else
         @verse = nil
@@ -37,19 +42,21 @@ class PagesController < ApplicationController
 
   # back-end code for pages/profile
   def profile
+    
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
+    @groups = current_user.groups.split(',')
     if (User.find_by_username(params[:id]))
     @username = params[:id]
     else
     redirect_to root_path, :alert=> "User #{params[:id]} not found!"
     end
     
-    @posts = Post.all.where('user_id = ?', User.find_by_username(params[:id]).id)
+    @posts = Post.all.where('user_id = ? AND groupid IS ?', User.find_by_username(params[:id]).id, nil)
     @newPost = Post.new
     
     require "rubygems"
       require "json"
-      if (User.find_by_username(params[:id]).verse) then
+      if (User.find_by_username(params[:id]).verse) and (User.find_by_username(params[:id]).verse) != "" then
         b = BibleGateway.new # defaults to :king_james_version, but can be initialized to different version
         b.version = :new_king_james_version
         @verse = JSON.parse(b.lookup(User.find_by_username(params[:id]).verse).to_json)['content']
@@ -59,12 +66,22 @@ class PagesController < ApplicationController
   
   end
   
-  def sermons_list
-    @sermons = ['psalm-23','a-plea-for-purity-part-1']
+  def showgroup
+    @groups = current_user.groups.split(',')
+    @posts = Post.all.where('groupid = ?', params[:groupid])
+    @newPost = Post.new
+    @g = Group.find(params[:groupid])
+    
+    @apart = false
+    
+    if @groups.include?("#{params[:groupid]}") then
+      @apart = true
+    end
   end
   
   def list
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
+    @groups = current_user.groups.split(',')
     if (User.find_by_username(params[:id]))
     @username = params[:id]
     else
@@ -87,6 +104,7 @@ class PagesController < ApplicationController
   
   def search_handler
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
+    @groups = current_user.groups.split(',')
     @query = params[:id]
     @type = params[:id1]
     if @type == 'users'
@@ -96,15 +114,11 @@ class PagesController < ApplicationController
       @posts = Post.where('lower(content) LIKE ?', "%#{@query.downcase}%").order("created_at DESC").take(50)
     end
   end
-  
-
-  # back-end code for pages/groups
-  def groups
-  end
 
   # back-end code for pages/prayers
   def posts
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
+    @groups = current_user.groups.split(',')
      if params[:type] then
        @posts = Post.all.where('post_type = ?', params[:type].capitalize)
      else
@@ -114,6 +128,7 @@ class PagesController < ApplicationController
   
   def postpage
     if !current_user then redirect_to "/signin", :alert => "You are not signed in!" end
+    @groups = current_user.groups.split(',')
     if (Post.find(params[:id]))
     @post = params[:id]
     @p = Post.find(params[:id])

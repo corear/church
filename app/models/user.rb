@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   after_create :welcome_send
   
   def welcome_send
-    UserMailer.signup_confirmation(self).deliver
+    # UserMailer.signup_confirmation(self).deliver
   end
   
     def follow(other)

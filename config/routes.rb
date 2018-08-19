@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :comments
   end
   
+  resources :groups
+  
   # This defines the routes for the pages
   get '/home' => 'pages#home'
 
@@ -37,7 +39,13 @@ Rails.application.routes.draw do
   
   get '/post/:id' => 'pages#postpage'
   
+  get '/group/:groupid' => 'pages#showgroup'
+  
   get '/search/:id1/:id' => 'pages#search_handler'
+  
+  get '/group/:groupid/join' => 'groups#join'
+  
+  get '/group/:groupid/leave' => 'groups#leave', as: "leave_group_path"
   
   
   get :send_custom, to: 'pages#send_custom', as: :send_custom

@@ -1,0 +1,43 @@
+
+
+<%= render '/home' %>
+
+
+    
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-top:50px">
+        
+         <div style="margin-top:20px;">
+             <% if @groups.count > 0 then %>
+             <% for i in 0..@groups.count-1 %>
+             
+            <% @p = Group.find(@groups[i]) %>
+                 <a href="/group/<%= @p.id %>">
+        <div class="post-container">
+          <div class="panel-body row">
+              <div class='col-sm-2'>
+              </div>
+              <div class="col-sm-7">
+                  <a href="/group/<%= @p.id %>" class='post-content'><%= @p.name %></a>
+              </div>
+               <div class="col-sm-3">
+                  <p class="post-date"><%= distance_of_time_in_words(@p.created_at,Time.now) %> ago</p>
+              </div>
+              </div>
+        </div>
+         </a>
+         
+         
+         
+         <% end %>
+        <% end %>
+         </div>
+    </div>
+    <div class="col-sm-2"></div>
+    
+    
+<script>
+    document.title="My Groups"
+    
+    document.getElementById("post").onclick = function(){document.getElementById('bouncing').style.visibility = 'visible'};
+</script>

@@ -88,14 +88,7 @@ background:
                
     </div>
     
-   <div style="margin-top:80px">
-        <% for @p in @featured %>
-        <%= render "/components/post" %>
-        <% end %>  
-        <center>
-            <a href="/all_posts?type=announcement" class="btn-lg btn-danger">See All Announcements</a>
-        </center>
-   </div>
+    
    <% if @verse != nil then %>
         <%= simple_format(@verse) %>
     <% end %>

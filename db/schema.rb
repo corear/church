@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414235356) do
+ActiveRecord::Schema.define(version: 20180805052042) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -24,12 +24,26 @@ ActiveRecord::Schema.define(version: 20180414235356) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "owner"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "members",     default: ""
+    t.string   "elders",      default: ""
+  end
+
+  add_index "groups", ["name"], name: "index_groups_on_name", unique: true
+  add_index "groups", ["owner"], name: "index_groups_on_owner"
+
   create_table "posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "post_type",  default: "Update"
+    t.integer  "groupid"
   end
 
   add_index "posts", ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
@@ -71,6 +85,7 @@ ActiveRecord::Schema.define(version: 20180414235356) do
     t.string   "bg",                     default: "Option 4"
     t.string   "hex",                    default: "#1ac9c9"
     t.string   "verse"
+    t.string   "groups",                 default: ""
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

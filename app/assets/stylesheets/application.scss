@@ -15,6 +15,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
 
 @media only screen and (min-width : 320px) {
 
@@ -69,6 +71,30 @@
 
 }
 
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #bfbfbf;
+  --gray-dark: #343a40;
+  --primary: #13B57D;
+  --primary-dark: #24966f;
+  --secondary: #fff;
+  --success: #55b559;
+  --info: #0ab1fc;
+  --warning: #fbc53c;
+  --danger: #f55145;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
 
 body {
     background-color: rgba(212, 216, 212, 0.25);
@@ -490,6 +516,10 @@ white-space: normal;
   box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3)
 }
 
+.halfraised{
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2)
+}
+
 .rounded{
   border-radius:50%;
 }
@@ -663,4 +693,32 @@ sup{
     margin: 3px;
     color: white;
     top:-.15em;
+}
+
+input[type=password]{
+    font-family: 'Fira Sans', sans-serif !important;
+    letter-spacing:5px;
+}
+
+.frame-holder{
+    
+}
+
+.tag2{
+    padding:20px;font-size:3rem;border-radius:50%;width:60px;height:60px;color:white;margin-left:50%;line-height: 0.7;padding-left:  22px;transform: translateX(-50%);margin-bottom:20px;display:inline-block
+}
+
+.tooltip-inner {
+    background-color:var(--light);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    padding:10px 20px;
+    color:#333;
+    text-transform:uppercase;
+    font-weight:500;
+}
+
+.tooltip-arrow, .arrow {
+    visibility:hidden;
+    opacity:0;
+  display:none;
 }

@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
 private
 
 def response_to_sign_up_failure(resource)
-  if resource.email == "" || resource.password == nil || resource.first_name == "" || resource.last_name == "" || resource.phone == "" || resource.city == "" || resource.street == "" || resource.zip == "" || resource.state == ""
+  if resource.email == "" || resource.password == nil
     redirect_to :back, alert: "Please fill out the form in its entirety. Make sure the email is unique and the passwords match."
   elsif User.pluck(:email).include? resource.email
     redirect_to :back, alert: "The email #{resource.email} already exists!"
