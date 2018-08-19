@@ -19,7 +19,7 @@ class PostsController < ApplicationController
         respond_to do |f|
             if (@post.save)
                 if @post.post_type == "Announcement" then
-                    if @post.group_id = params[:post][:group_id] then
+                    if @post.groupid = params[:post][:group_id] then
                         for @u in Group.find(params[:post][:group_id]).members.split(',') do
                             UserMailer.announcement(@u,@post.content,@post.id).deliver
                         end

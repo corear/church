@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
         
         if @group.update_attributes(params[:group].permit(:name,:description))
-            redirect_to '/group/3'
+            redirect_to "/group/#{@group.id}"
         end
     end
     
