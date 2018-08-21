@@ -20,7 +20,7 @@ class PostsController < ApplicationController
             if (@post.save)
                 if @post.post_type == "Announcement" then
                     if @post.groupid != nil then
-                        for @u in @post.members.split(',') do
+                        for @u in Group.find(@post.groupid).members.split(',') do
                             UserMailer.announcement(User.find(@u),@post.content,@post.id).deliver
                         end
                     end
