@@ -45,13 +45,13 @@ Rails.application.configure do
   :domain               => "herokuapp.com",
   :authentication       => "plain",
   :enable_starttls_auto => true,
-  :user_name            => 'christfellowshipapp@gmail.com',
+  :user_name            => 'betaappmailer@gmail.com',
   :password             => ENV["EMAIL_PASSWORD"],
   }
   
   config.action_mailer.perform_deliveries = true
   
-  config.action_mailer.default_url_options = {host: "www.christfellowship.herokuapp.com"}
+  config.action_mailer.default_url_options = {host: "www.betatitle.herokuapp.com"}
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
