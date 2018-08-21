@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "Beta Title <christfellowshipapp@gmail.com>"
+  default :from => "Beta Title <betaappmailer@gmail.com>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -23,6 +23,6 @@ class UserMailer < ActionMailer::Base
     @msg = msg
     @nam = User.find_by_email(from).display_name
     @usernam = User.find_by_email(from).username
-    mail(:to => "#{@user.display_name} <#{@user.email}>", :subject => "#{subject}", :reply_to => "#{from}", :from => "#{@nam} via Beta Title <christfellowshipapp@gmail.com>")
+    mail(:to => "#{@user.display_name} <#{@user.email}>", :subject => "#{subject}", :reply_to => "#{from}", :from => "#{@nam} via Beta Title <betaappmailer@gmail.com>")
   end
 end

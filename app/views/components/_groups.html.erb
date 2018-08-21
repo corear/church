@@ -33,7 +33,7 @@
 }
 
 .bc{
-    visibility:visible;
+    visibility:visible !important;
     opacity:1;
 }
 
@@ -41,9 +41,11 @@
   transition: padding-top 0.5s; /* control the speed of fading here*/
   padding-top:10px;
   width:100%;
-  height:100%;
   position:absolute;
   overflow-y:scroll;
+  overflow-x:hidden;
+  visibility:hidden;
+  z-index:2000;
 }
 
 .post-container{
@@ -67,14 +69,39 @@
     font-size:2rem;
 }
 
+#new_group > .inputField2{
+    
+    background: none;
+    width: 30%;
+    border: none;
+    border-bottom: 3px solid #e1cf00;
+    margin:  10px;
+    margin-left: 35%;
+    text-align:  center;
+    padding: 10px;
+    color: #e1cf00;
+    letter-spacing:  1px;
+    font-size: 3rem;
+    border-radius:0;
+}
+
 </style>
 
 <% @groups = current_user.groups.split(',') %>
+<% @newGroup = Group.new %>
 
-<div class="bgr" id="bgr">
+<div class="bgr" id="bgr"></div>
   
   <div id="frame">
-      <h1 style="border-bottom:3px solid white;color:white;letter-spacing:3px;margin-left:50%;transform:translateX(-50%);width:auto;display:inline-block;padding-bottom:6px">GROUPS</h1>
+      <center><button class="btn btn-primary" onclick="closeStuff()" style="background:none;padding:0 !important;margin:0 !important;font-size:  5rem;/* line-height:  50px; */top: -3px;position:  relative;"><i class="fas fa-times-circle"></i></button></center><br>
+      <h1 style="border-bottom:3px solid white;color:white;letter-spacing:3px;margin-left:50%;transform:translateX(-50%);width:auto;display:inline-block;padding-bottom:6px">GROUPS&nbsp;<button class="btn btn-primary" onclick="toggleCreate()" style="background:none;padding:0 !important;margin:0 !important;font-size:  3rem;/* line-height:  50px; */top: -3px;position:  relative;"><i class="fas fa-pen-square"></i></button></h1>
+             <div id="newGroup" style="display:none">
+                 <%= form_for(@newGroup) do |f| %> 
+                 <%= f.text_field :name, autofocus: true, :class => "inputField2", :pattern=>".{3,}" %><br>
+                 <%= f.submit "CREATE", :class => "btn-lg btn-primary", :id => "post", :style => "height:100%;background-color:#{current_user.hex};width:30%;margin:10px;margin-left:35%" %>
+                 <% end %>
+             </div>
+              
               <div>
                   <h4 class="tag2" style="background-color:<%= current_user.hex %>;"><%= @groups.count %></h4>
               </div>
@@ -93,7 +120,11 @@
               </div>
               <div class="col-xs-7">
                   <a href="/group/<%= @groupy.id %>" class='group-content' style="color:black"><%= @groupy.name %></a><br>
+                  <% if @groupy.owner != "" && @groupy.owner != nil then %>
                   <a href="/group/<%= @groupy.id %>" class='group-content'style="text-transform:none;font-size:1.5rem;color:#909090;margin-left:1px">Owned by @<%= User.find(@groupy.owner).username %></a>
+                  <% else %>
+                  <a href="/group/<%= @groupy.id %>" class='group-content'style="text-transform:none;font-size:1.5rem;color:#909090;margin-left:1px">No owner!</a>
+                  <% end %>
               </div>
                <div class="col-xs-3">
                   <p class="group-date"><i class="fas fa-users"></i>&nbsp;<%= @groupy.members.split(',').count %></p>
@@ -109,17 +140,36 @@
          <% end %>
         <% end %>
         
-        </div>
+        
 </div>
 
 <script>
+    function toggleCreate(){
+  if (document.getElementById("newGroup").style.display == "block") {
+      document.getElementById("newGroup").style.display = "none";
+  } else {
+      document.getElementById("newGroup").style.display = "block";
+  }
+}
+    
     $('#bgr').click(function(){
         document.getElementById("frame").style.paddingTop = "10px";
         document.getElementById("bgr").style.opacity = "0";
         
         setTimeout(function() {
+          $('#frame').removeClass("bc");
           $('#bgr').removeClass("bc");
         },500);
      
     });
+    
+    function closeStuff(){
+        document.getElementById("frame").style.paddingTop = "10px";
+        document.getElementById("bgr").style.opacity = "0";
+        
+        setTimeout(function() {
+          $('#frame').removeClass("bc");
+          $('#bgr').removeClass("bc");
+        },500);
+    }
 </script>

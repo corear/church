@@ -54,6 +54,8 @@ class PagesController < ApplicationController
     @posts = Post.all.where('user_id = ? AND groupid IS ?', User.find_by_username(params[:id]).id, nil)
     @newPost = Post.new
     
+    
+    
     require "rubygems"
       require "json"
       if (User.find_by_username(params[:id]).verse) and (User.find_by_username(params[:id]).verse) != "" then

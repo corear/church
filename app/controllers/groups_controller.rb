@@ -1,5 +1,27 @@
 class GroupsController < ApplicationController
     
+    def new
+        @group = Group.new
+    end
+    
+    def create
+        @group = Group.new(post_params)
+        @group.owner = current_user.id
+        @group.members = "#{current_user.id}"
+        
+            
+            if Group.find_by_name(@group.name) then
+                redirect_to "/@#{current_user.username}", alert: "Error: Group name already exists." 
+            else
+                
+                @group.save
+            current_user.groups += ",#{@group.id}"
+            current_user.save
+                
+                redirect_to "/group/#{@group.id}"
+            end
+    end
+    
     def join
         @groups = current_user.groups.split(',')
         
@@ -75,6 +97,10 @@ class GroupsController < ApplicationController
         if @group.update_attributes(params[:group].permit(:name,:description))
             redirect_to "/group/#{@group.id}"
         end
+    end
+    
+    def post_params
+        params.require(:group).permit(:name)
     end
     
 end

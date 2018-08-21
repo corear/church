@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "christfellowshipapp@gmail.com"
+  default from: "betaappmailer@gmail.com"
   layout 'mailer'
 end
